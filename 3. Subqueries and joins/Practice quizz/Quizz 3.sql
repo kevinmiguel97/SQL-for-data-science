@@ -45,3 +45,38 @@ SELECT
       E.LastName AS Employee
 FROM Employees E INNER JOIN Employees M 
 ON E.ReportsTo = M.EmployeeID;
+
+-- Q5. Find the name and ID of the artists who do not have albums. 
+
+SELECT 
+    Name,
+    ArtistId
+FROM Artists
+WHERE ArtistId NOT IN
+(   SELECT DISTINCT(ArtistId)
+    FROM Albums
+)
+
+-- Q6. Use a UNION to create a list of all the employee's and customer's first names and last names 
+-- ordered by the last name in descending order.
+
+SELECT 
+    FirstName,
+    LastName
+FROM Employees
+UNION
+SELECT 
+    FirstName,
+    LastName
+FROM Customers
+ORDER BY LastName DESC
+
+-- Q7. See if there are any customers who have a different city listed in their billing city versus their customer city.
+SELECT 
+    Customers.FirstName,
+    Customers.LastName,
+    Customers.City AS CustomerCity,
+    Invoices.BillingCity AS BillingCity
+FROM Customers LEFT JOIN Invoices
+ON Customers.CustomerId = Invoices.CustomerId
+WHERE CustomerCity <> BillingCity
