@@ -30,7 +30,7 @@ FROM Employees
 WHERE YrsWorking > 15
 ORDER BY LastName ASC
 
--- Q4. Profiling the Customers table, answer the following question
+-- Q4. Profiling the Customers table, answer the following question. Find the number of null values
 
 SELECT 
     COUNT(*)-COUNT(Fax) AS Fax, 
